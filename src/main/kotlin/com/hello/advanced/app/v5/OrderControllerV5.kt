@@ -17,20 +17,6 @@ class OrderControllerV5(
     @GetMapping("/v5/request")
     fun request(itemId: String): String {
 
-        val value = object : TraceStrategy{
-            override fun call() {
-                orderServiceV5.orderItem(itemId)
-            }
-        }
-
-        LogContext().execute(
-            logStrategy = object : TraceStrategy {
-                override fun call() {
-                    orderServiceV5.orderItem(itemId)
-                }
-            }
-        )
-
         LogContext().execute(
             logStrategy = object : TraceStrategy {
                 override fun call() {
